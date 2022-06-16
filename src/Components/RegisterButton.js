@@ -7,12 +7,11 @@ import {
 } from 'react-native';
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {setLoad} from '../../Redux/slices/globalSlice';
-import {setRegister} from '../../Redux/slices/userSlice';
+import {setLoad} from '../Redux/slices/globalSlice';
+import {setRegister} from '../Redux/slices/userSlice';
 import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
-import {moderateScale} from 'react-native-size-matters';
-import {textColor} from '../../Assets/Colors';
+import styleButton from './stylesButton';
 
 const RegisterButton = ({name, email, password, image, bio}) => {
   const dispatch = useDispatch();
@@ -70,28 +69,13 @@ const RegisterButton = ({name, email, password, image, bio}) => {
 
   return (
     <TouchableOpacity
-      style={{
-        marginTop: moderateScale(10),
-        backgroundColor: textColor.black,
-        borderRadius: moderateScale(20),
-        paddingHorizontal: moderateScale(20),
-      }}
+      style={styleButton.toContainerButton}
       onPress={() => validationCheck()}>
       {isLoad ? (
         <ActivityIndicator />
       ) : (
-        <View
-          style={{
-            marginHorizontal: moderateScale(100),
-            paddingVertical: moderateScale(10),
-          }}>
-          <Text
-            style={{
-              color: textColor.white,
-              fontWeight: 'bold',
-            }}>
-            Sign Up
-          </Text>
+        <View style={styleButton.containerText}>
+          <Text style={styleButton.text}>Sign Up</Text>
         </View>
       )}
     </TouchableOpacity>

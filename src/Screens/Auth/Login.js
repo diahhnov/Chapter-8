@@ -1,18 +1,11 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  TextInput,
-  Dimensions,
-} from 'react-native';
+import {View, Text, TouchableOpacity, TextInput} from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import * as yup from 'yup';
 import {Formik} from 'formik';
-import {moderateScale} from 'react-native-size-matters';
-import LoginButton from '../../Components/core/LoginButton';
-import StatusBarCore from '../../Components/core/StatusBarCore';
-import {backgroundColors, textColor} from '../../Assets/Colors';
+import StatusBarCore from '../../Components/StatusBarCore';
+import LoginButton from '../../Components/LoginButton';
+import styleAuth from './stylesAuth';
 
 let loginSchema = yup.object().shape({
   email: yup
@@ -25,8 +18,6 @@ let loginSchema = yup.object().shape({
     .required('Password is required.'),
 });
 
-const {width} = Dimensions.get('screen');
-
 const Login = () => {
   const navigation = useNavigation();
 
@@ -37,61 +28,24 @@ const Login = () => {
       validationSchema={loginSchema}
       onSubmit={values => console.log(values)}>
       {({handleChange, handleBlur, values, touched, errors}) => (
-        <View
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-            backgroundColor: backgroundColors.fire,
-          }}>
+        <View style={styleAuth.containerScreen}>
           <StatusBarCore />
-          <View
-            style={{
-              alignItems: 'center',
-              padding: moderateScale(18),
-            }}>
-            <Text
-              style={{
-                color: textColor.black,
-                fontSize: moderateScale(28),
-                fontWeight: 'bold',
-                marginBottom: moderateScale(36),
-              }}>
-              LOGIN
-            </Text>
+          <View style={styleAuth.containerText}>
+            <Text style={styleAuth.textH1}>LOGIN</Text>
             <TextInput
-              style={{
-                width: width - moderateScale(50),
-                borderWidth: moderateScale(1),
-                borderRadius: moderateScale(8),
-                padding: moderateScale(12),
-              }}
+              style={styleAuth.tInputEmail}
               placeholder="Email"
               onChangeText={handleChange('email')}
               onBlur={handleBlur('email')}
               value={values.email}
             />
             {errors.email && touched.email ? (
-              <Text
-                style={{
-                  fontSize: 12,
-                  color: 'red',
-                  fontWeight: '500',
-                  marginTop: moderateScale(4),
-                  marginBottom: moderateScale(12),
-                }}>
-                {errors.email}
-              </Text>
+              <Text style={styleAuth.textError}>{errors.email}</Text>
             ) : (
               <View />
             )}
             <TextInput
-              style={{
-                marginTop: moderateScale(12),
-                width: width - moderateScale(50),
-                borderWidth: moderateScale(1),
-                borderRadius: moderateScale(8),
-                padding: moderateScale(12),
-              }}
+              style={styleAuth.tInputPassword}
               placeholder="Password"
               secureTextEntry={true}
               onChangeText={handleChange('password')}
@@ -99,32 +53,16 @@ const Login = () => {
               value={values.password}
             />
             {errors.password && touched.password ? (
-              <Text
-                style={{
-                  fontSize: 12,
-                  color: 'red',
-                  fontWeight: '500',
-                  marginTop: moderateScale(4),
-                  marginBottom: moderateScale(12),
-                }}>
-                {errors.password}
-              </Text>
+              <Text style={styleAuth.textError}>{errors.password}</Text>
             ) : (
               <View />
             )}
             <LoginButton email={values.email} password={values.password} />
             <View>
               <TouchableOpacity
-                style={{
-                  marginTop: moderateScale(10),
-                }}
+                style={styleAuth.tobotton}
                 onPress={() => navigation.navigate('Register')}>
-                <Text
-                  style={{
-                    color: textColor.black,
-                  }}>
-                  New User?, Register
-                </Text>
+                <Text style={styleAuth.textButton}>New User?, REGISTER</Text>
               </TouchableOpacity>
             </View>
           </View>

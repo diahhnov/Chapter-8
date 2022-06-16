@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">pokemonApp</string>
-<string moduleConfig="true" name="CodePushDeploymentKey">f_RVU9exC3-avY-Zn2_tbRyCgS0XnzsVXmJ46</string>
+    <string moduleConfig="true" name="CodePushDeploymentKey">f_RVU9exC3-avY-Zn2_tbRyCgS0XnzsVXmJ46</string>
 </resources>

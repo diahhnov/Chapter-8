@@ -17,7 +17,7 @@ import {moderateScale} from 'react-native-size-matters';
 import {getDataPokedex} from '../../Redux/slices/pokeSlice';
 import database from '@react-native-firebase/database';
 import {BackIcon} from '../../Assets/Image';
-import {backgroundColors, textColor} from '../../Assets/Colors';
+import styles from './styles';
 
 const PokemonScreen = () => {
   const navigation = useNavigation();
@@ -143,160 +143,80 @@ const PokemonScreen = () => {
   }, [checkPokemon]);
 
   return (
-    <View style={{flex: 1, backgroundColor: backgroundColors.fire}}>
+    <View style={styles.containerScreen}>
       {isLoad ? (
         <ActivityIndicator />
       ) : (
         <FlatList
           ListHeaderComponent={() => (
-            <View
-              style={{
-                marginHorizontal: moderateScale(12),
-                marginTop: moderateScale(24),
-              }}>
-              <View
-                style={{
-                  padding: moderateScale(10),
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}>
+            <View style={styles.containerHeader}>
+              <View style={styles.backgroundHeader}>
                 <TouchableOpacity
                   onPress={() => {
                     dispatch(getDataPokedex());
                     dispatch(setCatch(1));
                     navigation.navigate('PokeDexScreen');
                   }}>
-                  <Image
-                    source={BackIcon}
-                    style={{
-                      tintColor: textColor.white,
-                    }}
-                  />
+                  <Image source={BackIcon} style={styles.backIcon} />
                 </TouchableOpacity>
-                <Text
-                  style={{
-                    fontSize: moderateScale(20),
-                    fontWeight: 'bold',
-                    color: textColor.white,
-                  }}>
-                  Pokemon Detail
-                </Text>
+                <Text style={styles.textPokemonDetail}>Pokemon Detail</Text>
                 {catching ? (
                   <View
-                    style={catching =>
-                      ({
-                        padding: moderateScale(6),
-                        borderRadius: moderateScale(10),
-                        backgroundColor: catching ? 'green' : 'red',
-                      }(catching))
-                    }>
-                    <Text
-                      style={{
-                        fontWeight: 'bold',
-                        color: textColor.white,
-                      }}>
-                      Catched
-                    </Text>
+                    style={{
+                      padding: moderateScale(6),
+                      borderRadius: moderateScale(10),
+                    }}>
+                    <Text style={styles.textCatch}>Catched</Text>
                   </View>
                 ) : (
                   <TouchableOpacity
-                    style={catching =>
-                      ({
-                        padding: moderateScale(6),
-                        borderRadius: moderateScale(10),
-                        backgroundColor: catching ? 'green' : 'red',
-                      }(catching))
-                    }
+                    style={{
+                      padding: moderateScale(6),
+                      borderRadius: moderateScale(10),
+                    }}
                     onPress={() => onCatch()}>
-                    <Text
-                      style={{
-                        fontWeight: 'bold',
-                        color: textColor.white,
-                      }}>
-                      Catch Me!
-                    </Text>
+                    <Text style={styles.catchMe}>Catch Me!</Text>
                   </TouchableOpacity>
                 )}
               </View>
               <Animated.View
                 style={{marginTop: upValue, marginLeft: leftValue}}>
-                <View
-                  style={{alignItems: 'center', paddingTop: moderateScale(50)}}>
+                <View style={styles.containerImagePokemon}>
                   <Image
                     source={{
                       uri: pokemonData?.sprites?.other['official-artwork']
                         .front_default,
                     }}
-                    style={{
-                      width: moderateScale(150),
-                      height: moderateScale(150),
-                    }}
+                    style={styles.imagePokemon}
                   />
                 </View>
               </Animated.View>
               <View style={{flexDirection: 'column'}}>
-                <View
-                  style={{
-                    marginTop: moderateScale(24),
-                    alignItems: 'center',
-                  }}>
-                  <Text
-                    style={{
-                      fontSize: moderateScale(50),
-                      fontWeight: 'bold',
-                      color: textColor.white,
-                    }}>
+                <View style={styles.containerNamePokemon}>
+                  <Text style={styles.namePokemon}>
                     {pokemonData?.name?.charAt(0).toUpperCase() +
                       pokemonData?.name?.slice(1)}
                   </Text>
-                  <View
-                    style={{
-                      borderRadius: moderateScale(12),
-                      margin: moderateScale(8),
-                      padding: moderateScale(12),
-                    }}>
-                    <Text style={{fontWeight: 'bold'}}>Information:</Text>
+                  <View style={styles.containerInformation}>
+                    <Text style={styles.text}>Information:</Text>
                     <Text>Height : {pokemonData.height}</Text>
                     <Text>Weight : {pokemonData.weight}</Text>
                     <Text>Species : {pokemonData?.species?.name}</Text>
                   </View>
                 </View>
               </View>
-              <View
-                style={{
-                  marginHorizontal: moderateScale(10),
-                  marginBottom: moderateScale(18),
-                  borderRadius: moderateScale(12),
-                  paddingHorizontal: moderateScale(12),
-                }}>
-                <Text
-                  style={{
-                    fontWeight: 'bold',
-                  }}>
-                  Types :
-                </Text>
+              <View style={styles.containerTypes}>
+                <Text style={styles.text}>Types :</Text>
                 <FlatList
                   horizontal={true}
                   data={pokemonData.types}
                   keyExtractor={(item, index) => index}
                   renderItem={({item}) => (
-                    <Text
-                      style={{
-                        margin: moderateScale(4),
-                      }}>
-                      {item.type.name}
-                    </Text>
+                    <Text style={styles.types}>{item.type.name}</Text>
                   )}
                 />
               </View>
-              <View
-                style={{
-                  marginHorizontal: moderateScale(10),
-                  marginBottom: moderateScale(18),
-                  borderRadius: moderateScale(12),
-                  paddingHorizontal: moderateScale(12),
-                }}>
+              <View style={styles.containerAbl}>
                 <Text
                   style={{
                     fontWeight: 'bold',
@@ -308,23 +228,12 @@ const PokemonScreen = () => {
                   data={pokemonData.abilities}
                   keyExtractor={(item, index) => index}
                   renderItem={({item}) => (
-                    <Text
-                      style={{
-                        margin: moderateScale(4),
-                      }}>
-                      {item.ability.name}
-                    </Text>
+                    <Text style={styles.types}>{item.ability.name}</Text>
                   )}
                 />
               </View>
 
-              <Text
-                style={{
-                  marginBottom: moderateScale(6),
-                  fontWeight: 'bold',
-                }}>
-                Moves :{' '}
-              </Text>
+              <Text style={styles.moves}>Moves : </Text>
             </View>
           )}
           numColumns={2}
@@ -332,17 +241,7 @@ const PokemonScreen = () => {
           data={pokemonData.moves}
           keyExtractor={(item, index) => String(index)}
           renderItem={({item}) => (
-            <Text
-              style={{
-                padding: moderateScale(8),
-                fontSize: 16,
-                backgroundColor: 'blanchedalmond',
-                margin: moderateScale(12),
-                width: 150,
-                borderRadius: moderateScale(8),
-              }}>
-              {item.move.name}
-            </Text>
+            <Text style={styles.manyMoves}>{item.move.name}</Text>
           )}
         />
       )}

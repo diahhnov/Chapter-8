@@ -10,11 +10,9 @@ import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
-import {setLoad} from '../../Redux/slices/globalSlice';
-import {setLogin} from '../../Redux/slices/userSlice';
-import {moderateScale} from 'react-native-size-matters';
-import {backgroundColors, customColor, textColor} from '../../Assets/Colors';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {setLoad} from '../Redux/slices/globalSlice';
+import {setLogin} from '../Redux/slices/userSlice';
+import styleButton from './stylesButton';
 
 const LoginButton = ({email, password}) => {
   const navigation = useNavigation();
@@ -62,28 +60,13 @@ const LoginButton = ({email, password}) => {
 
   return (
     <TouchableOpacity
-      style={{
-        marginTop: moderateScale(10),
-        backgroundColor: textColor.black,
-        borderRadius: moderateScale(20),
-        paddingHorizontal: moderateScale(20),
-      }}
+      style={styleButton.toContainerButton}
       onPress={() => validationCheck()}>
       {isLoad ? (
         <ActivityIndicator />
       ) : (
-        <View
-          style={{
-            marginHorizontal: moderateScale(100),
-            paddingVertical: moderateScale(10),
-          }}>
-          <Text
-            style={{
-              color: textColor.white,
-              fontWeight: 'bold',
-            }}>
-            Sign In
-          </Text>
+        <View style={styleButton.containerText}>
+          <Text style={styleButton.text}>Sign In</Text>
         </View>
       )}
     </TouchableOpacity>

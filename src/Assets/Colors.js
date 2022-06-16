@@ -46,6 +46,7 @@ export const textColor = {
   white: '#FFF',
   black: '#17171B',
   grey: '#747476',
+  red: 'red',
   number: 'rgba(23, 23, 27, 0.6)',
 };
 

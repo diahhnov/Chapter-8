@@ -1,6 +1,6 @@
 import {StatusBar, useColorScheme} from 'react-native';
 import React from 'react';
-import {backgroundColors} from '../../Assets/Colors';
+import {backgroundColors} from '../Assets/Colors';
 
 const StatusBarCore = () => {
   const theme = useColorScheme();
