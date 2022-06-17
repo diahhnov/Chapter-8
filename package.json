@@ -24,6 +24,8 @@
     "@react-navigation/stack": "^6.2.1",
     "@reduxjs/toolkit": "^1.8.2",
     "appcenter": "^4.4.4",
+    "appcenter-analytics": "^4.4.4",
+    "appcenter-crashes": "^4.4.4",
     "axios": "^0.27.2",
     "formik": "^2.2.9",
     "react": "17.0.2",

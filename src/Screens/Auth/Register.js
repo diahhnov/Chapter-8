@@ -18,8 +18,6 @@ let registerSchema = yup.object().shape({
     .min(6, e => `Password must atleast ${e.min} characters.`)
     .required('Password is required.'),
   name: yup.string().required('Name is required.'),
-  image: yup.string().required('Image is required.'),
-  bio: yup.string().required('Bio is required.'),
 });
 
 export default function Register() {
@@ -27,7 +25,7 @@ export default function Register() {
 
   return (
     <Formik
-      initialValues={{email: '', password: '', name: '', image: '', bio: ''}}
+      initialValues={{email: '', password: '', name: ''}}
       validateOnMount={true}
       validationSchema={registerSchema}
       onSubmit={values => console.log(values)}>
@@ -82,24 +80,10 @@ export default function Register() {
             ) : (
               <View />
             )}
-            <TextInput
-              style={styleAuth.tInputPassword}
-              placeholder="Image URL"
-              onChangeText={handleChange('image')}
-              onBlur={handleBlur('image')}
-              value={values.image}
-            />
-            {errors.image && touched.image ? (
-              <Text style={styleAuth.textError}>{errors.image}</Text>
-            ) : (
-              <View />
-            )}
             <RegisterButton
               name={values.name}
               email={values.email}
               password={values.password}
-              image={values.image}
-              bio={values.bio}
             />
             <TouchableOpacity
               style={styleAuth.tobotton}

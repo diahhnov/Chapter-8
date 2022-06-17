@@ -19,17 +19,10 @@ const RegisterButton = ({name, email, password, image, bio}) => {
 
   const saveUserCredentialsToFirebase = id => {
     const reference = database().ref(`/users/${id}`);
-
-    if (image === '') {
-      image =
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQudhbFG-3Q4clb7ryhoT7PoyDHfpde8Ke4w&usqp=CAU';
-    }
     const dataContent = {
       id: id,
       name: name,
       email: email,
-      image: image,
-      bio: bio,
     };
     try {
       reference.set(dataContent);

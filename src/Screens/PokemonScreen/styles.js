@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     margin: moderateScale(8),
     padding: moderateScale(12),
   },
-  text: {fontWeight: 'bold'},
+  text: {fontWeight: 'bold', fontStyle: 'italic', fontSize: moderateScale(20)},
   containerTypes: {
     marginHorizontal: moderateScale(10),
     marginBottom: moderateScale(18),
