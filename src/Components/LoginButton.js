@@ -66,7 +66,7 @@ const LoginButton = ({email, password}) => {
         <ActivityIndicator />
       ) : (
         <View style={styleButton.containerText}>
-          <Text style={styleButton.text}>Sign In</Text>
+          <Text style={styleButton.text}>LOGIN</Text>
         </View>
       )}
     </TouchableOpacity>

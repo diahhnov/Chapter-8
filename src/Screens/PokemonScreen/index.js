@@ -66,7 +66,8 @@ const PokemonScreen = () => {
   }, [dispatch, pokemonData.name]);
 
   const onCatch = async () => {
-    const generateNumber = Math.round(Math.random() * 1000);
+    const generateRandom = Math.random() * 1000;
+    const generateNumber = Math.round(generateRandom);
 
     if (generateNumber > 500 && generateNumber % 2 === 0) {
       setCatching(true);
